@@ -23,15 +23,13 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * This is the main router for requests of all types.
- */
 public class GeoWebCacheDispatcher extends AbstractController {
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-            return null;
+        System.out.println("进入了控制器");
+           return null;
     }
 
 
