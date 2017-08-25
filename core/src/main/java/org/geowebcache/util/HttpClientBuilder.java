@@ -17,7 +17,6 @@
  */
 package org.geowebcache.util;
 
-import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 

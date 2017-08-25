@@ -1,7 +1,5 @@
 package org.geowebcache.util;
 
-import java.util.*;
-
 public class CompositeIterable<T> implements Iterable<T> {
 
     private List<Iterable<T>> iterables;

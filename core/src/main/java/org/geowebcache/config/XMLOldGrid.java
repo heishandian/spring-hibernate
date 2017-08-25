@@ -16,8 +16,6 @@
  */
 package org.geowebcache.config;
 
-import org.geowebcache.grid.*;
-
 import java.io.Serializable;
 
 
