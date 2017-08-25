@@ -31,7 +31,7 @@ public class GeoWebCacheDispatcher extends AbstractController {
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-return null;
+            return null;
     }
 
 

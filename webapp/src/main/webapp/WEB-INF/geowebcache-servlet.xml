@@ -12,7 +12,6 @@
       <props> 
         <prop key="/service/**">geowebcacheDispatcher</prop>
         <prop key="/demo/**">geowebcacheDispatcher</prop>
-	    <prop key="/proxy/**">gwcProxyDispatcher</prop>
 	    <prop key="/home">geowebcacheDispatcher</prop>
       </props>
     </property>
