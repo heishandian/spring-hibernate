@@ -15,6 +15,8 @@
         <spring.version>4.3.9.RELEASE</spring.version>
         <log4j.version>1.2.17</log4j.version>
         <mybatis.version>3.2.6</mybatis.version>
+        <spring-hibernate.version>4.3.5.Final</spring-hibernate.version>
+        <hibernate.version>5.2.9.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -22,6 +24,7 @@
     <modules>
         <module>core</module>
         <module>webapp</module>
+        <module>connectdatabase</module>
     </modules>
 
 

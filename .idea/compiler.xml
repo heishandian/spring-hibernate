@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="connectdatabase" />
         <module name="gwc-core" />
         <module name="webapp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="connectdatabase" target="1.5" />
       <module name="gwc-core" target="1.8" />
       <module name="parentproject" target="1.5" />
       <module name="webapp" target="1.5" />
