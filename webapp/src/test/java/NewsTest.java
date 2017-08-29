@@ -7,16 +7,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:spring-jpa.xml"})
+@ContextConfiguration({"classpath*:spring-dao.xml"})
 public class NewsTest {
     @Autowired
     private IHibernateCRUD hibernateCRUD;
- /*   private ApplicationContext ctx = null;
 
-    {
-        ctx = new ClassPathXmlApplicationContext("spring-jpa.xml");
-    }
-*/
+    /*   private ApplicationContext ctx = null;
+
+       {
+           ctx = new ClassPathXmlApplicationContext("spring-dao.xml");
+       }
+   */
 /*    @Test
 public void testSource(){
     DataSource dataSource = (DataSource)ctx.getBean("dataSource");
@@ -26,18 +27,23 @@ public void testSource(){
         e.printStackTrace();
     }
 }*/
-   @Test
-    public void testInsert(){
+    @Test
+    public void testInsert() {
         NewsEntity newsEntity = new NewsEntity();
-        newsEntity.setId(1);
-        newsEntity.setAuthor("kk");
-        newsEntity.setContent("ss");
+        newsEntity.setId(3);
+        newsEntity.setAuthor("kkk");
+        newsEntity.setContent("sss");
         newsEntity.setTitle("ss");
         hibernateCRUD.insert(newsEntity);
     }
 
     @Test
-    public void testSelect(){
+    public void delete() {
+        hibernateCRUD.delete(1);
+    }
+
+    @Test
+    public void testSelect() {
         System.out.println(hibernateCRUD.select(1));
     }
 

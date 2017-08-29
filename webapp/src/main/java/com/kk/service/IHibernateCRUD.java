@@ -8,4 +8,8 @@ public interface IHibernateCRUD {
 
     public NewsEntity select(Integer id);
 
+    public void update(NewsEntity newsEntity);
+
+    public void delete(Integer id);
+
 }

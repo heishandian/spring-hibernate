@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <!-- 配置自动扫描的包 -->
     <context:component-scan base-package="com.kk.*"></context:component-scan>
@@ -26,58 +26,55 @@
         <property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" /><!-- 引用数据源 -->
+    <!--实体管理工厂-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/> <!-- hibernate适配器-->
         <property name="packagesToScan">
-            <list>
-                <value>com.kk.models.*</value><!-- 加载hibernate的jpa注解形式的实体类 -->
-            </list>
+            <array>
+                <value>com.kk.models</value> <!--指定实体类的位置-->
+            </array>
         </property>
-        <property name="hibernateProperties">
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+        </property>
+        <property name="jpaProperties">
             <props>
-                <!-- 设置Hibernate方言 -->
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <!-- 是否打印sql -->
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+                 <prop key="hibernate.show_sql">true</prop>
+                 <prop key="hibernate.format_sql">true</prop>
+                 <prop key="hibernate.hbm2ddl.auto">validate</prop>-->
+
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <!-- 格式化sql -->
                 <prop key="hibernate.format_sql">true</prop>
-                <!-- 是否自动更新表 -->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.current_session_context_class">thread</prop>
-                <!-- 最大抓取深度，如果为0，则关闭默认的外连接抓取。建议值为0-3 -->
-                <prop key="hibernate.max_fetch_depth">1</prop>
-                <!-- 用于生成有助于调试的注释信息，默认为关闭 -->
-                <prop key="hibernate.use_sql_comments">true</prop>
             </props>
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
-
-
-    <!--&lt;!&ndash; spring和MyBatis完美整合，不需要mybatis的配置映射文件 &ndash;&gt;
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;
-        <property name="mapperLocations" value="classpath:com/yaoli/mapping/*.xml"></property>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    &lt;!&ndash; DAO接口所在包名，Spring会自动查找其下的类 &ndash;&gt;
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.yaoli.dao" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    <!--指定jpa的位置-->
+    <jpa:repositories base-package="com.kk.dao" repository-impl-postfix="Impl"
+                      transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="generateDdl" value="false" />
+        <property name="database" value="MYSQL" />
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+        <!-- <property name="showSql" value="true" /> -->
     </bean>
 
-    &lt;!&ndash; 配置事务管理器 &ndash;&gt;
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
 
-    &lt;!&ndash; 启用事务注解 &ndash;&gt;
-    <tx:annotation-driven transaction-manager="transactionManager"/>-->
 
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <aop:aspectj-autoproxy/>
 </beans>
