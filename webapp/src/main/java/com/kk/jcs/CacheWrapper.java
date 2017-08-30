@@ -10,7 +10,7 @@
  * 
  * @endCopyright 
  */  
-package com.jizg.common.cache;
+package com.kk.jcs;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
@@ -18,13 +18,14 @@ import org.apache.jcs.engine.CacheElement;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-/** 
+
+/**
  *  
  *  
  * @version $Rev: 1046 $ $Date: 2012-01-12 17:41:24 +0800 $ 
  */  
 public class CacheWrapper {  
-    private final Logger logger = Logger.getLogger(CacheWrapper.class);  
+    private final Logger logger = Logger.getLogger(CacheWrapper.class);
       
     /** 
      * Cache实例 

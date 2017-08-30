@@ -1,4 +1,4 @@
-package com.jizg.common.cache;
+package com.kk.jcs;
 
 import org.apache.log4j.Logger;
 
@@ -8,18 +8,18 @@ import java.util.TimerTask;
 public class TestCacheSafeLifeSecondTask extends TimerTask {
     private Logger logger = Logger.getLogger(TestCacheSafeLifeSecondTask.class);
     private static int runNumber = 1;  
-    private static TestCacheSafeLifeSecondTask initcachetask = null;  
+    private static TestCacheSafeLifeSecondTask initcachetask = null;
   
-    public static TestCacheSafeLifeSecondTask getInstance(long nextTimelong) {  
+    public static TestCacheSafeLifeSecondTask getInstance(long nextTimelong) {
         if (initcachetask == null) {  
-            initcachetask = new TestCacheSafeLifeSecondTask();  
+            initcachetask = new TestCacheSafeLifeSecondTask();
         }  
         return initcachetask;  
     }  
   
     @Override  
     public void run() {  
-       CacheWrapper cache = CacheUtils.getCacheWrapperByName(CacheUtils.cacheName);  
+       CacheWrapper cache = CacheUtils.getCacheWrapperByName(CacheUtils.cacheName);
        Random random = new Random();
        String cacheKey = "test"+random.nextInt(1000);  
          

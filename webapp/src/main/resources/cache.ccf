@@ -1,0 +1,13 @@
+
+# optional region "testCache1" specific configuration settings
+jcs.region.testCache1=
+jcs.region.testCache1.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.testCache1.cacheattributes.MaxObjects=1000
+jcs.region.testCache1.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.testCache1.cacheattributes.UseMemoryShrinker=false
+#jcs.region.testCache1.elementattributes=org.apache.jcs.engine.ElementAttributes
+jcs.region.testCache1.elementattributes.IsEternal=false
+jcs.region.testCache1.elementattributes.MaxLifeSeconds=180
+jcs.region.testCache1.elementattributes.IsSpool=false
+jcs.region.testCache1.elementattributes.IsLateral=false
+fjcs.region.testCache1.elementattributes.IsRemote=false

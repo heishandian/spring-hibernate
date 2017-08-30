@@ -12,10 +12,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="connectdatabase" target="1.5" />
+      <module name="connectdatabase" target="1.8" />
       <module name="gwc-core" target="1.8" />
-      <module name="parentproject" target="1.5" />
-      <module name="webapp" target="1.5" />
+      <module name="parentproject" target="1.8" />
+      <module name="webapp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.kk.com.kk.service.impl;
+package com.kk.service.impl;
 
 import com.kk.dao.NewDao;
 import com.kk.models.NewsEntity;
